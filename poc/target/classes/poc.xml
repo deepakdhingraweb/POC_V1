@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <http:listener-config name="POC" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <flow name="pocFlow">
+        <http:listener config-ref="POC" path="/poc" allowedMethods="GET,POST" metadata:id="00dfc5cf-f9d8-45ee-95c5-eeee75a333e8" doc:name="HTTP"/>
+        <json:json-to-object-transformer returnClass="com.mypack.parser.jsonToObject" metadata:id="ef709c2f-2a22-4f05-91eb-9bf359c1f1d0" doc:name="JSON to Object" mimeType="*/*"/>
+        <echo-component doc:name="Java Object Output"/>
+    </flow>
+</mule>
